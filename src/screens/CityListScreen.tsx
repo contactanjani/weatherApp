@@ -4,7 +4,7 @@ import {Weather} from '../models/Weather';
 import {WeatherService} from '../services/WeatherService';
 import {CityWeatherCell} from '../organisms/CityWeatherCell';
 
-const kFetchInterval = 10000;
+const kFetchInterval = 60000;
 
 const CityListScreen = ({navigation}) => {
   const [weatherItems, setWeatherItems] = useState<Weather[]>([]);
