@@ -21,6 +21,21 @@ type GetWeatherResponse = {
   data: Weather[];
 };
 
+function getStaticListOfCities(): ILatlong[] {
+  return [
+    {latitude: 43.7181302, longitude: -79.6651325},
+    {latitude: 49.2578263, longitude: -123.1939435},
+    {latitude: 40.6976637, longitude: -74.119764},
+    {latitude: 45.2502975, longitude: -76.0804354},
+    {latitude: 47.6131746, longitude: -122.4821468},
+    {latitude: 46.8572913, longitude: -71.4849978},
+    {latitude: 38.8938672, longitude: -77.0846157},
+    {latitude: 49.8539176, longitude: -97.2929219},
+    {latitude: 51.0277555, longitude: -114.2279169},
+    {latitude: 44.970797, longitude: -93.3315181},
+  ];
+}
+
 class WeatherService {
   public fetchWeatherInfoForLocationsFromAPI = async (
     payload: IWeatherRequestPayload,
@@ -61,18 +76,7 @@ class WeatherService {
 
   public fetchWeatherUpdate = async (callback: any): Promise<void> => {
     getDBConnection().then(db => {
-      const latlongList = [
-        {latitude: 43.7181302, longitude: -79.6651325},
-        {latitude: 49.2578263, longitude: -123.1939435},
-        {latitude: 40.6976637, longitude: -74.119764},
-        {latitude: 45.2502975, longitude: -76.0804354},
-        {latitude: 47.6131746, longitude: -122.4821468},
-        {latitude: 46.8572913, longitude: -71.4849978},
-        {latitude: 38.8938672, longitude: -77.0846157},
-        {latitude: 49.8539176, longitude: -97.2929219},
-        {latitude: 51.0277555, longitude: -114.2279169},
-        {latitude: 44.970797, longitude: -93.3315181},
-      ];
+      const latlongList = getStaticListOfCities();
       const internalCallBack = (data: any | null) => {
         const weather = new Weather(data);
         saveWeatherItems(db, weather).then(() => {
@@ -89,4 +93,4 @@ class WeatherService {
   };
 }
 const weatherService = new WeatherService();
-export {weatherService as WeatherService};
+export {weatherService as WeatherService, getStaticListOfCities};

@@ -4,7 +4,7 @@ import {Weather} from '../models/Weather';
 import {WeatherService} from '../services/WeatherService';
 import {CityWeatherCell} from '../organisms/CityWeatherCell';
 
-const kFetchInterval = 60000;
+const kFetchInterval = 10000;
 
 const CityListScreen = ({navigation}) => {
   const [weatherItems, setWeatherItems] = useState<Weather[]>([]);
@@ -20,7 +20,6 @@ const CityListScreen = ({navigation}) => {
     });
     // load data from api on app launch
     WeatherService.fetchWeatherUpdate((weatherItemsResult: Weather[]) => {
-      console.log('finished api call with data', weatherItemsResult);
       weatherRef.current = weatherItemsResult;
       setWeatherItems(weatherRef.current);
     });

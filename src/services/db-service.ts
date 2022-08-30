@@ -42,7 +42,6 @@ export const getWeatherItems = async (
     return weatherItems;
   } catch (error) {
     console.error(error);
-    console.log('failure error is', error);
     throw Error('Failed to get todoItems !!!');
   }
 };
